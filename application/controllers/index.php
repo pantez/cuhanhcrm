@@ -31,8 +31,6 @@ class Index extends CI_Controller {
 	{
 		if ($this->session->userdata('user_login') != 1)
             redirect(base_url() . 'login', 'refresh');
-
-
 		$this->load->view('themes/includes_header');
         $this->load->view('themes/includes_navbar');
 		$this->load->view('themes/index');

@@ -133,3 +133,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+
+//Mutillang thêm vào
+$autoload['libraries'] = array('session');
+$autoload['helper'] = array('url');

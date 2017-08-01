@@ -1,6 +1,3 @@
-<?php
-        $system_title = $this->db->get_where('settings', array('type' => 'system_title'))->row()->description;
-?>
 <div id="wrapper"> <!-- open wrapper -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -10,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><?php echo $system_title; ?></a>
+                <a class="navbar-brand" href="index.html"><?php echo lang('Onion CRM'); ?></a>
             </div>
             <!-- /.navbar-header -->
 
