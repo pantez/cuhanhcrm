@@ -1,3 +1,11 @@
+<?php 
+    $language = $this->session->userdata('site_lang');
+    if (!isset($language)){
+        $language = ($language != "") ? $language : "english";
+        $this->session->set_userdata('site_lang', $language);
+    }
+
+?>
 <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -11,10 +19,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="frontend/images/en.png"> English <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="frontend/images/<?php echo $this->session->userdata('site_lang').'.png'; ?>"> <?php echo ucfirst($this->session->userdata('site_lang')); ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a onclick="window.location.href='<?php echo base_url(); ?>LanguageSwitcher/switchLang/english'"  href="#"><img src="frontend/images/en.png"> English </a> </li>
-                        <li><a onclick="window.location.href='<?php echo base_url(); ?>LanguageSwitcher/switchLang/vietnamese'" href="#"><img src="frontend/images/vi.png"> VietNam </a></li>
+                        <li><a onclick="window.location.href='<?php echo base_url(); ?>LanguageSwitcher/switchLang/english'"  href="#"><img src="frontend/images/english.png"> English </a> </li>
+                        <li><a onclick="window.location.href='<?php echo base_url(); ?>LanguageSwitcher/switchLang/vietnamese'" href="#"><img src="frontend/images/vietnamese.png"> Vietnamese </a></li>
                     </ul>
                 </li> 
             </ul>

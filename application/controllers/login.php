@@ -26,12 +26,12 @@ class Login extends CI_Controller {
         $this->load->library('session');
 		$this->load->helper('url');
 		$this->load->helper('language');
-		//$this->lang->load('message','english');
-		//$this->config->set_item('language', 'english');
+		
     }
 
 	public function index()
-	{
+	{	
+
 		$this->login();
 		$this->load->view('themes/includes_header');
 		$this->load->view('themes/includes_login_navbar');
