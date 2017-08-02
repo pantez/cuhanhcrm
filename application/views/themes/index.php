@@ -1,3 +1,7 @@
+<?php 
+include 'includes_header.php';
+include 'includes_navbar.php';
+?>
 <div id="page-wrapper" style="min-height: 183px;">
             <div class="row">
                 <div class="col-lg-12">
@@ -548,3 +552,5 @@
             <!-- /.row -->
         </div>
     </div>  <!-- /.close wrapper -->
+
+    <?php include 'includes_footer.php';?>

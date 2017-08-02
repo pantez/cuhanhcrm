@@ -29,12 +29,24 @@ class Index extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('user_login') != 1)
+		if ($this->session->userdata('login_user_id') < 1)
             redirect(base_url() . 'login', 'refresh');
-		$this->load->view('themes/includes_header');
-        $this->load->view('themes/includes_navbar');
+
+
+			
+		// $this->load->view('themes/includes_header');
+        // $this->load->view('themes/includes_navbar');
+		// $this->load->view('themes/index');
+		// $this->load->view('themes/includes_footer');
+	}
+	 function dashboard()
+	{
+		if ($this->session->userdata('login_user_id') < 1)
+            redirect(base_url() . 'login', 'refresh');	
+		//$this->load->view('themes/admin/includes_header');
+        //$this->load->view('themes/admin/includes_navbar');
 		$this->load->view('themes/index');
-		$this->load->view('themes/includes_footer');
+		//$this->load->view('themes/admin/includes_footer');
 	}
 	
 }

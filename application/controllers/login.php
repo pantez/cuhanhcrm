@@ -33,10 +33,8 @@ class Login extends CI_Controller {
 	{	
 
 		$this->login();
-		$this->load->view('themes/includes_header');
-		$this->load->view('themes/includes_login_navbar');
 		$this->load->view('themes/login');
-		$this->load->view('themes/includes_footer');
+
 	}
 
 
@@ -48,10 +46,8 @@ class Login extends CI_Controller {
 				$email = $this->input->get_post('email', TRUE);
 				$password = $this->input->get_post('password', TRUE);
 				$login_status = $this->validate_login($email, $password);
-				//echo $login_status;
 				 if ($login_status == 'success') {
-					  redirect(base_url() .'index');
-
+            			redirect(base_url() . 'index/dashboard', 'refresh');
 				 }else{
 					$this->session->set_flashdata('login_error',TRUE);
 					$this->session->set_flashdata('message', 'Invalid Login');
@@ -64,15 +60,14 @@ class Login extends CI_Controller {
 
 
 	 function validate_login($email = '', $password = '') {
-		$credential = array('email' => $email, 'password' => $password);
+		$credential = array('email' => $email, 'matkhau' => $password);
 
-		$query = $this->db->get_where('user', $credential);
+		$query = $this->db->get_where('taikhoan_view', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            $this->session->set_userdata('user_login', '1');
-            $this->session->set_userdata('login_user_id', $row->id);
+            $this->session->set_userdata('login_user_id', $row->taikhoan_id);
             $this->session->set_userdata('name', $row->email);
-            $this->session->set_userdata('login_type', $row->type);
+            $this->session->set_userdata('login_type', $row->tennhom);
             return 'success';
         }
 
