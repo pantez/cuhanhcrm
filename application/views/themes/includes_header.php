@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo lang('Onion CRM'); ?></title>
+    <title><?php echo lang($title);?></title>
     
      <?php include 'includes_top.php'; ?>
 

@@ -12,7 +12,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="/"><?php echo lang('Onion CRM'); ?></a>
+            <a class="navbar-brand" href="/"><?php echo lang($system_name); ?></a>
         </div>
     
         <!-- Collect the nav links, forms, and other content for toggling -->

@@ -20,7 +20,7 @@ class Index extends CI_Controller {
 	 */
 	 function __construct() {
         parent::__construct();
-        //$this->load->model('crud_model');
+        $this->load->model('defaultload');
         $this->load->database();
         $this->load->library('session');
 		$this->load->helper('url');
@@ -31,22 +31,41 @@ class Index extends CI_Controller {
 	{
 		if ($this->session->userdata('login_user_id') < 1)
             redirect(base_url() . 'login', 'refresh');
-
-
-			
-		// $this->load->view('themes/includes_header');
-        // $this->load->view('themes/includes_navbar');
-		// $this->load->view('themes/index');
-		// $this->load->view('themes/includes_footer');
 	}
 	 function dashboard()
 	{
 		if ($this->session->userdata('login_user_id') < 1)
             redirect(base_url() . 'login', 'refresh');	
-		//$this->load->view('themes/admin/includes_header');
-        //$this->load->view('themes/admin/includes_navbar');
+		
+		$data['title'] = 'Onion CRM';
+		$data['system_name'] = 'Onion CRM';
+ 
+		
+		$this->load->view('themes/includes_header',$data);
+		$this->load->view('themes/includes_navbar');
+		
+		$list_nhom = $this->session->userdata('login_type');
+		
+		foreach($list_nhom as $value){
+			if ($value == 'admin'){
+				$this->load->view('themes/admin/includes_admin_menu');
+				break;
+			}else{
+				if ($value == 'warehouse')
+					$this->load->view('themes/warehouse/includes_warehouse_menu');
+				if ($value == 'sales')
+					$this->load->view('themes/sales/includes_sales_menu');
+				if ($value == 'marketing')
+					$this->load->view('themes/marketing/includes_marketing_menu');		
+			}
+		}
+		
+		
+
+
+		$this->load->view('themes/includes_navbar_end');
 		$this->load->view('themes/index');
-		//$this->load->view('themes/admin/includes_footer');
+		$this->load->view('themes/includes_footer');
 	}
 	
 }

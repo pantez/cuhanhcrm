@@ -31,9 +31,13 @@ class Login extends CI_Controller {
 
 	public function index()
 	{	
-
+		$data['title'] = 'Onion CRM';
+		$data['system_name'] = 'Onion CRM';
 		$this->login();
+		$this->load->view('themes/includes_header',$data);
+		$this->load->view('themes/includes_login_navbar');	
 		$this->load->view('themes/login');
+		$this->load->view('themes/includes_footer');
 
 	}
 
@@ -63,11 +67,17 @@ class Login extends CI_Controller {
 		$credential = array('email' => $email, 'matkhau' => $password);
 
 		$query = $this->db->get_where('taikhoan_view', $credential);
-        if ($query->num_rows() > 0) {
+        $num_row= $query->num_rows();
+		if ($num_row > 0) {
             $row = $query->row();
             $this->session->set_userdata('login_user_id', $row->taikhoan_id);
             $this->session->set_userdata('name', $row->email);
-            $this->session->set_userdata('login_type', $row->tennhom);
+
+			$list_nhom = array();
+			for($i=0;$i<$num_row;$i++){
+				$list_nhom[$i] = $query->row($i)->tennhom;
+			}
+             $this->session->set_userdata('login_type',$list_nhom);
             return 'success';
         }
 

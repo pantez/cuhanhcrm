@@ -1,0 +1,22 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class defaultload extends CI_Model {
+
+    function __construct() {
+        parent::__construct();
+    }
+
+    function clear_cache() {
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+    }
+
+
+     function get_menu() {
+        $login_id = $this->session->set_userdata('login_user_id');	
+    }
+
+}
