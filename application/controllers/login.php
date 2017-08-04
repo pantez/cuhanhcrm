@@ -20,17 +20,23 @@ class Login extends CI_Controller {
 	 */
 	 function __construct() {
         parent::__construct();
+		 //$this->load->database();
+ 		$this->load->library(array('session'));
+        $this->load->model('functions_model', 'functions');
+
+		$this->load->library('session');
 		$this->load->helper('form');
-		$this->load->library('form_validation');
-        $this->load->database();
-        $this->load->library('session');
+		$this->load->library('form_validation');       
 		$this->load->helper('url');
 		$this->load->helper('language');
+
+
 		
     }
 
 	public function index()
 	{	
+		
 		$data['title'] = 'Onion CRM';
 		$data['system_name'] = 'Onion CRM';
 		$this->login();
@@ -64,22 +70,43 @@ class Login extends CI_Controller {
 
 
 	 function validate_login($email = '', $password = '') {
-		$credential = array('email' => $email, 'matkhau' => $password);
+		
+		$sql ="SELECT * FROM taikhoan_view WHERE email = ? AND matkhau = ? ";
+		$result = $this->functions->query_my($sql,array($email,$password));
 
-		$query = $this->db->get_where('taikhoan_view', $credential);
-        $num_row= $query->num_rows();
+		$num_row = count($result);
 		if ($num_row > 0) {
-            $row = $query->row();
-            $this->session->set_userdata('login_user_id', $row->taikhoan_id);
-            $this->session->set_userdata('name', $row->email);
-
+			
+			$this->session->set_userdata('login_user_id',$result[0]['taikhoan_id']);
+			$this->session->set_userdata('name', $result[0]['email']);
+			
 			$list_nhom = array();
 			for($i=0;$i<$num_row;$i++){
-				$list_nhom[$i] = $query->row($i)->tennhom;
-			}
-             $this->session->set_userdata('login_type',$list_nhom);
-            return 'success';
-        }
+		 		$list_nhom[$i] = $result[$i]['tennhom'];
+		 	}
+		$this->session->set_userdata('login_type',$list_nhom);
+        return 'success';
+		}
+		
+
+		//print_r($result);
+		//die();
+		// $credential = array('email' => $email, 'matkhau' => $password);
+
+		// $query = $this->db->get_where('taikhoan_view', $credential);
+        // $num_row= $query->num_rows();
+		// if ($num_row > 0) {
+        //     $row = $query->row();
+        //     $this->session->set_userdata('login_user_id', $row->taikhoan_id);
+        //     $this->session->set_userdata('name', $row->email);
+
+		// 	$list_nhom = array();
+		// 	for($i=0;$i<$num_row;$i++){
+		// 		$list_nhom[$i] = $query->row($i)->tennhom;
+		// 	}
+        //      $this->session->set_userdata('login_type',$list_nhom);
+        //     return 'success';
+        // }
 
 		return 'invalid';
 	 }

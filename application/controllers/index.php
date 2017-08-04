@@ -21,7 +21,7 @@ class Index extends CI_Controller {
 	 function __construct() {
         parent::__construct();
         $this->load->model('defaultload');
-        $this->load->database();
+        // $this->load->database();
         $this->load->library('session');
 		$this->load->helper('url');
 
